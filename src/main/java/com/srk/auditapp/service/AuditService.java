@@ -11,4 +11,8 @@ public interface AuditService {
     List<EmployeeModel> getEmployees();
 
     EmployeeModel getEmployee(Integer id);
+
+    EmployeeModel updateEmployee(EmployeeModel employeeModel, Integer id);
+
+    EmployeeModel deleteEmployee(Integer id);
 }

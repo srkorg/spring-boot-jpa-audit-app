@@ -1,5 +1,7 @@
 package com.srk.auditapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -8,8 +10,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Audited
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "emp_table")
+@JsonIgnoreProperties(value = {"createdOn", "updatedOn"}, allowGetters = true)
 public class Employee {
     @Id
     @GeneratedValue
@@ -17,6 +21,7 @@ public class Employee {
     private String name;
     private String department;
     @CreatedDate
+    @Column(updatable = false)
     private Date createdOn;
     @LastModifiedDate
     private Date updatedOn;
